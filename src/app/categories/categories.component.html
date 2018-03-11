@@ -1,0 +1,8 @@
+<perfect-scrollbar id="menusx" style="max-height: 500px;">
+	<div *ngFor="let category of categories" (click)="onSelect(category)">
+		<a ><img *ngIf="category.header_img" class="image" [src]="category.header_img"
+		title="{{category.public_description}}">{{category.title}}</a>
+	</div>
+</perfect-scrollbar>
+
+<app-information-category [category]="selectedCategory"></app-information-category>

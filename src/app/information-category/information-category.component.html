@@ -1,0 +1,16 @@
+<div *ngIf="category" style="width: 80%;">
+	<perfect-scrollbar id="content" style="max-width: 90%; max-height: 500px;">
+		<img *ngIf="category.banner_img" class="banner" [src]="category.banner_img">
+		<div class="articolo">
+			<div class="articolo-titolo">{{category.title}}</div>
+
+			<p [innerHTML]="category.public_description_html | escapeHtml"></p>			
+			<p [innerHTML]="category.description_html | escapeHtml"></p>
+			
+			<div class="articolo-titolo">Comments</div>
+			<p [innerHTML]="category.submit_text_html | escapeHtml"></p>
+
+		</div>
+	</perfect-scrollbar>
+
+</div>
