@@ -1,3 +1,7 @@
+<div id="navigazione"><nav>Reddit &gt; <a routerLink="/categories">Categories</a> &gt;
+	<input (keyup)="searchTerm$.next($event.target.value)" placeholder="Search Categories"></nav>
+</div>
+
 <perfect-scrollbar id="menusx" style="max-height: 500px;">
 	<div *ngFor="let category of categories" (click)="onSelect(category)">
 		<a ><img *ngIf="category.header_img" class="image" [src]="category.header_img"

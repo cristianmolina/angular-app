@@ -1,4 +1,6 @@
 import { Type } from '@angular/core';
+
+import { Comment } from '../comments/comment';
 /**
  * Clase con las propiedades a utilizar de una categoria.
  */
@@ -11,6 +13,8 @@ export class Category {
   public_description_html: string;
   submit_text_html: string;
   public_description: string;
+  url: string;
+  comments: Comment[];
 
   constructor() {}
 }

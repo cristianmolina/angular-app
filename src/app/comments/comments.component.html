@@ -1,0 +1,7 @@
+
+<div class="articolo-titolo">Comments</div>
+<div *ngFor="let comment of comments | slice:0:5">
+	<div class="comment">
+	<a class="comment-title" [href]="comment.url" target="_blank">{{comment.title}}</a>
+	</div>
+</div>

@@ -4,12 +4,9 @@
 		<div class="articolo">
 			<div class="articolo-titolo">{{category.title}}</div>
 
-			<p [innerHTML]="category.public_description_html | escapeHtml"></p>			
-			<p [innerHTML]="category.description_html | escapeHtml"></p>
+			<p [innerHTML]="category.public_description_html | escapeHtml"></p>
 			
-			<div class="articolo-titolo">Comments</div>
-			<p [innerHTML]="category.submit_text_html | escapeHtml"></p>
-
+			<app-comments  [comments]="category.comments"></app-comments>
 		</div>
 	</perfect-scrollbar>
 
