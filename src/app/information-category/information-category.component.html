@@ -1,13 +1,17 @@
-<div *ngIf="category" style="width: 80%;">
-	<perfect-scrollbar id="content" style="max-width: 90%; max-height: 500px;">
-		<img *ngIf="category.banner_img" class="banner" [src]="category.banner_img">
-		<div class="articolo">
-			<div class="articolo-titolo">{{category.title}}</div>
-
-			<p [innerHTML]="category.public_description_html | escapeHtml"></p>
+<perfect-scrollbar *ngIf="category" class="content-scroll content-information">
+	<div class="banner">
+		<img *ngIf="category.banner_img" class="banner-image" [src]="category.banner_img">
+		<div class="banner-ico-content"><img *ngIf="category.icon_img" class="banner-ico" [src]="category.icon_img"></div>
 			
-			<app-comments  [comments]="category.comments"></app-comments>
+	</div>
+	<div class="articolo">
+		<div class="articolo-titolo content-information">
+			{{category.title}}
+			<div id="icon-commet"><i class="large material-icons">comment</i></div>
 		</div>
-	</perfect-scrollbar>
 
-</div>
+		<p class="articolo-desc" [innerHTML]="category.public_description_html | escapeHtml"></p>
+		
+		<app-comments  [comments]="category.comments"></app-comments>
+	</div>
+</perfect-scrollbar>

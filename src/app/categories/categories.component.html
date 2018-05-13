@@ -1,12 +1,22 @@
-<div id="navigazione"><nav>Reddit &gt; <a routerLink="/categories">Categories</a> &gt;
-	<input (keyup)="searchTerm$.next($event.target.value)" placeholder="Search Categories"></nav>
+<div id="navigazione">
+	<ul>
+		<li class="selected-category"><a>Reddit - {{selectedCategory? selectedCategory.display_name_prefixed : ""}}</a></li>
+	</ul>
 </div>
-
-<perfect-scrollbar id="menusx" style="max-height: 500px;">
-	<div *ngFor="let category of categories" (click)="onSelect(category)">
-		<a ><img *ngIf="category.header_img" class="image" [src]="category.header_img"
-		title="{{category.public_description}}">{{category.title}}</a>
-	</div>
-</perfect-scrollbar>
-
-<app-information-category [category]="selectedCategory"></app-information-category>
+<div id="icon-menu" (click)="toggleState()"><i class="large material-icons">menu</i></div>
+<div class="content">	
+	<perfect-scrollbar id="menusx" [@stateMenu]="stateMenu">
+		<div class="search"><input (keyup)="searchTerm$.next($event.target.value)" placeholder="Search Categories"></div>
+		<div class="top"></div>
+		<div class="a" *ngFor="let category of categories" (click)="onSelect(category)">
+			<img *ngIf="category.icon_img" class="image-icon-menu" [src]="category.icon_img" title="{{category.public_description}}">
+			<div class="text">{{category.display_name_prefixed}}</div>
+		</div>
+	</perfect-scrollbar>
+	<app-information-category [category]="selectedCategory" class="content-information"></app-information-category>
+</div>
+<div id="loader-content" *ngIf="showLoader">
+  <div id="loader-container">
+  <p id="loadingText">Loading</p>
+</div>
+</div>

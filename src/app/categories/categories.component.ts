@@ -4,7 +4,13 @@ import {Category} from './category';
 import {CategoryService} from '../services/category.service';
 import {RedditsData} from './reddits-data';
 import {Subject} from 'rxjs';
-
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 /**
  * Componente que muestra la lista de categorias.
  */
@@ -12,7 +18,19 @@ import {Subject} from 'rxjs';
   selector: 'app-categories',
   templateUrl: './categories.component.html',
   providers: [CategoryService],
-  styleUrls: ['./categories.component.css']
+  styleUrls: ['./categories.component.css'],
+  animations: [
+    trigger('stateMenu', [
+      state('inactive', style({
+        transform: 'translateX(0)'
+      })),
+      state('active',   style({
+        transform: 'translateX(-100%)'
+      })),
+      transition('inactive => active', animate('100ms ease-in')),
+      transition('active => inactive', animate('100ms ease-out'))
+    ])
+  ]
 })
 export class CategoriesComponent implements OnInit {
 
@@ -31,6 +49,9 @@ export class CategoriesComponent implements OnInit {
    */
   searchTerm$ = new Subject<string>();
 
+  stateMenu = 'inactive';
+  showLoader = true;
+
   /*
    * Constructor por defecto.
    * @param categoryService servicio.
@@ -47,6 +68,8 @@ export class CategoriesComponent implements OnInit {
     // Obtiene los comentarios de la categoria seleccionada.
     this.categoryService.getComments(category.url)
       .subscribe(data => this.initComments(data));
+
+    this.toggleState();
   }
 
   /**
@@ -66,10 +89,15 @@ export class CategoriesComponent implements OnInit {
     this.categories = [];
     const registros = redditsData.data['children'];
     registros.forEach(registro => {
+      if (!registro.data.icon_img) {
+        registro.data.icon_img = 'https://www.redditstatic.com/mweb2x/img/snoo-128.png';
+      }
+
       if (registro.data.title.toUpperCase().indexOf(redditsData.term.toUpperCase()) >= 0) {
         this.categories.push(registro.data);
       }
     });
+    this.showLoader = false;
   }
 
   /**
@@ -83,6 +111,10 @@ export class CategoriesComponent implements OnInit {
     });
 
     this.selectedCategory.comments = comments;
+  }
+
+  toggleState() {
+    this.stateMenu = this.stateMenu === 'active' ? 'inactive' : 'active';
   }
 
 }

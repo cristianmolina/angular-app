@@ -1,7 +1,7 @@
-
-<div class="articolo-titolo">Comments</div>
-<div *ngFor="let comment of comments | slice:0:5">
+<div *ngFor="let comment of comments | slice:0:100">
 	<div class="comment">
-	<a class="comment-title" [href]="comment.url" target="_blank">{{comment.title}}</a>
+		<div *ngIf="comment.thumbnail" class="image-thumbnail"><img class="image-thumbnail" [src]="comment.thumbnail"></div>
+		<a class="comment-title" [href]="comment.url" target="_blank">{{comment.title}}</a>
+		<a class="open-in-new-content" [href]="comment.url" target="_blank"><i class="large material-icons open-in-new">open_in_new</i></a>
 	</div>
 </div>

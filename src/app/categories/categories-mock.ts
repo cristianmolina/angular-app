@@ -8,6 +8,8 @@ export const CATEGORIES_MOCK: Category[] = [
     id: '1',
     title: 'Reddits',
     header_img: null,
+    icon_img: null,
+    display_name_prefixed: null,
     description_html: null,
     banner_img: null,
     public_description_html: null,
